@@ -1,0 +1,29 @@
+version: '4.34'
+
+services:
+
+  users:
+    build:
+      context: ./api/users
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+
+  posts:
+    build:
+      context: ./api/posts
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    depends_on:
+      - users
+
+  votes:
+    build:
+      context: ./api/votes
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    depends_on:
+      - users
+      - posts
